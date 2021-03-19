@@ -24,7 +24,7 @@ const Header = ({backButton}) => {
                 <img
                     className="header_logo"
                     src={"/logo.png"}
-                    alt="tinder logo"
+                    alt="LinkMe App"
                 />
             </Link>
             <Link to="/chat">
