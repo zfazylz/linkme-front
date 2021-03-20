@@ -26,24 +26,12 @@ class TinderCards extends Component {
     this.setState({
       cardID: this.state.cardID - 1,
     });
-    CardService.evaluateCard(uid, mark).then(
-      (response) => {
-        console.log(response.data);
-        if (this.state.cardID === 0) {
-          this.loadCards(1);
-        }
-      },
-      (error) => {
-        this.setState({
-          cards:
-            (error.response &&
-              error.response.data &&
-              error.response.data.detail) ||
-            error.message ||
-            error.toString(),
-        });
+    CardService.evaluateCard(uid, mark).then((response) => {
+      console.log(response.data);
+      if (this.state.cardID === 0) {
+        this.loadCards(1);
       }
-    );
+    });
   };
 
   loadCards = (page) => {
@@ -68,7 +56,11 @@ class TinderCards extends Component {
   };
 
   swipeBut = (dir) => {
-    if (this.state.cardID >= 0) {
+    if (
+      this.state.cardID >= 0 &&
+      this.state.cards &&
+      this.state.cardID < this.state.cards.results.length
+    ) {
       console.log("swipe" + this.state.cardID);
       this.state.refList[this.state.cardID].current.swipe(dir); // Swipe the card!
     }

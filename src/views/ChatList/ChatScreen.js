@@ -36,18 +36,18 @@ const ChatScreen = () => {
     <div className="chatScreen">
       <p className="chatScreen_timestamp">YOU MATCHED WITH ELLEN ON 10/08/20</p>
       {messages.map((message) =>
-        message.name ? (
+        messages.name ? (
           <div className="chatScreen_message">
             <Avatar
               className="chatScreen_image"
-              alt={message.name}
-              src={message.image}
+              alt={messages.name}
+              src={messages.image}
             />
-            <p className="chatScreen_text">{message.message}</p>
+            <p className="chatScreen_text">{messages.message}</p>
           </div>
         ) : (
           <div className="chatScreen_message">
-            <p className="chatScreen_textUser">{message.message}</p>
+            <p className="chatScreen_textUser">{messages.message}</p>
           </div>
         )
       )}
