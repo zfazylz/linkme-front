@@ -52,7 +52,7 @@ export const login = (username, password) => (dispatch) => {
         type: LOGIN_SUCCESS,
         payload: { user: data },
       });
-
+      console.log(data.message);
       return Promise.resolve();
     },
     (error) => {
