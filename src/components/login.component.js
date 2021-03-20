@@ -33,6 +33,7 @@ class Login extends Component {
       isAITUSupported: false,
       loading: false,
     };
+    alert(aituBridge.isSupported())
     if (aituBridge.isSupported()) {
       this.setState({loading: true})
       this.setState({isAITUSupported: true})
@@ -88,6 +89,7 @@ class Login extends Component {
   }
 
   handleAITULogin() {
+    alert('aitu login');
     this.setState({
       loading: true,
     });
