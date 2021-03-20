@@ -5,7 +5,7 @@ import React from "react";
 const MatchListView = () => {
     return (
         <div>
-            <Header backButton="/chat"/>
+            <Header/>
             <MatchListDiv/>
         </div>
     )

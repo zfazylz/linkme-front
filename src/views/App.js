@@ -30,7 +30,7 @@ class App extends Component {
               <ChatListView/>
             </Route>
             <Route path="/chat">
-              <Header backButton="/"/>
+              <Header backButton/>
               <Chats/>
             </Route>
             <Route exact path="/matches" component={MatchListDiv}/>

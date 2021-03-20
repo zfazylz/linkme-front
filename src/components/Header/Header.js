@@ -10,7 +10,7 @@ import {logout} from "../../actions/auth";
 import {connect} from "react-redux";
 
 class Header extends Component {
-  constructor(props, backButton) {
+  constructor(props, backButton = false) {
     super(props);
     this.logOutLink = this.logOutLink.bind(this);
 
@@ -19,7 +19,7 @@ class Header extends Component {
       showAdminBoard: false,
       currentUser: undefined,
     };
-    this.backButton = backButton;
+    this.backButton = backButton
   }
 
   logOutLink() {
@@ -27,8 +27,14 @@ class Header extends Component {
   }
 
   render() {
+    console.log(this.backButton)
     return (
       <div className="header">
+        <Link to="" onClick={this.logOutLink}>
+          <IconButton>
+            <ExitToAppIcon className="header_icon" fontSize="large"/>
+          </IconButton>
+        </Link>
         <Link to="/profile">
           <IconButton>
             <PersonIcon className="header_icon" fontSize="large"/>
@@ -37,11 +43,6 @@ class Header extends Component {
         <Link to="/matches">
           <IconButton>
             <ChatIcon className="header_icon" fontSize="large"/>
-          </IconButton>
-        </Link>
-        <Link to="" onClick={this.logOutLink}>
-          <IconButton>
-            <ExitToAppIcon className="header_icon" fontSize="large"/>
           </IconButton>
         </Link>
         <Link to="/chat">

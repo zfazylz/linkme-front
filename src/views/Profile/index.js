@@ -1,7 +1,5 @@
 import React, {Component} from "react";
-import {Redirect, Route} from 'react-router-dom';
 import ProfileService from "../../services/profile.service";
-import TinderCard from "react-tinder-card";
 import Header from "../../components/Header/Header";
 
 export default class ProfileView extends Component {
@@ -37,7 +35,7 @@ export default class ProfileView extends Component {
     const profile = this.state.content;
     return (
       <div>
-        <Header/>
+        <Header backButton={false}/>
         <div className="emptyCardContainer">
           <h1>Профиль</h1>
           <div
