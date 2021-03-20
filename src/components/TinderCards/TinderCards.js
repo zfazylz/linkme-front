@@ -1,72 +1,91 @@
-import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import React, { Component, useMemo } from "react";
 import { connect } from "react-redux";
 import TinderCard from "react-tinder-card";
 import "./TinderCards.css";
+import CardService from "../../services/card.service";
+import SwipeButtons from "../../components/SwipeButtons/SwipeButtons";
 
 class TinderCards extends Component {
-    state = {  }
-    render() { 
-        const { user: currentUser } = this.props;
-        
-        if (!currentUser) {
-          return <Redirect to="/login" />;
-        }
+  state = { cards: [], remainingCards: 0 };
+  componentDidMount() {
+    this.loadCards(1);
+  }
 
-        const people = [
-            {
-                name: "Fazyl 1",
-                url: "https://sun9-69.userapi.com/impf/SrhYsk7cH4w9PKo8TnmtWIs0IaacR4rGPLnvGQ/4wbM1vEu5q0.jpg?size=1620x2160&quality=96&sign=731987e96415b9629c02c602e5c76fee&type=album",
-            },
-            {
-                name: "Sanzhar Shabdarov 1",
-                url: "https://sun9-50.userapi.com/impg/QdeZZ_qO6958ycGBLHuFQp0r0YXwHguoA3gjGA/sIHDW63C9BM.jpg?size=960x1280&quality=96&sign=e4c0708397d3e1ce67f4b499d75a93c8&type=album",
-            },
-            {
-                name: "Fazyl 2",
-                url: "https://sun9-69.userapi.com/impf/SrhYsk7cH4w9PKo8TnmtWIs0IaacR4rGPLnvGQ/4wbM1vEu5q0.jpg?size=1620x2160&quality=96&sign=731987e96415b9629c02c602e5c76fee&type=album",
-            },
-            {
-                name: "Sanzhar Shabdarov 2",
-                url: "https://sun9-50.userapi.com/impg/QdeZZ_qO6958ycGBLHuFQp0r0YXwHguoA3gjGA/sIHDW63C9BM.jpg?size=960x1280&quality=96&sign=e4c0708397d3e1ce67f4b499d75a93c8&type=album",
-            },
-            {
-                name: "Fazyl 3",
-                url: "https://sun9-69.userapi.com/impf/SrhYsk7cH4w9PKo8TnmtWIs0IaacR4rGPLnvGQ/4wbM1vEu5q0.jpg?size=1620x2160&quality=96&sign=731987e96415b9629c02c602e5c76fee&type=album",
-            },
-            {
-                name: "Sanzhar Shabdarov 3",
-                url: "https://sun9-50.userapi.com/impg/QdeZZ_qO6958ycGBLHuFQp0r0YXwHguoA3gjGA/sIHDW63C9BM.jpg?size=960x1280&quality=96&sign=e4c0708397d3e1ce67f4b499d75a93c8&type=album",
-            },
-        ]
-        return (
-            <div>
-                <div className="tinderCards_cardContainer">
-                    {people.map((person) => (
-                        <TinderCard
-                            className="swipe"
-                            key={person.name}
-                            preventSwipe={["up", "down"]}
-                        >
-                            <div
-                                style={{backgroundImage: `url(${person.url})`}}
-                                className="card"
-                            >
-                                <h3>{person.name}</h3>
-                            </div>
-                        </TinderCard>
-                    ))}
-                </div>
-            </div>
-        );
-    }
+  evaluateCard = (uid, dir) => {
+    let mark = dir == "right";
+
+    CardService.evaluateCard(uid, mark).then(
+      (response) => {
+        console.log(response.data);
+        if (--this.state.remainingCards == 0) {
+          this.loadCards(1);
+        }
+      },
+      (error) => {
+        this.setState({
+          cards:
+            (error.response &&
+              error.response.data &&
+              error.response.data.detail) ||
+            error.message ||
+            error.toString(),
+        });
+      }
+    );
+  };
+
+  loadCards = (page) => {
+    CardService.myCards(page).then(
+      (response) => {
+        this.setState({
+          cards: response.data,
+          remainingCards: response.data.results.length,
+        });
+      },
+      (error) => {
+        this.setState({
+          cards:
+            (error.response &&
+              error.response.data &&
+              error.response.data.detail) ||
+            error.message ||
+            error.toString(),
+        });
+      }
+    );
+  };
+
+  render() {
+    return (
+      <div>
+        <div className="tinderCards_cardContainer">
+          {this.state.cards?.results?.map((person) => (
+            <TinderCard
+              onSwipe={(dir) => this.evaluateCard(person.user_id, dir)}
+              className="swipe"
+              key={person.user_id}
+              preventSwipe={["up", "down"]}
+            >
+              <div
+                style={{ backgroundImage: `url(${person.photos[0]})` }}
+                className="card"
+              >
+                <h3>{person.username}</h3>
+              </div>
+            </TinderCard>
+          ))}
+        </div>
+        <SwipeButtons />
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    const { user } = state.auth;
-    return {
-      user,
-    };
-  }
- 
+  const { user } = state.auth;
+  return {
+    user,
+  };
+}
+
 export default connect(mapStateToProps)(TinderCards);

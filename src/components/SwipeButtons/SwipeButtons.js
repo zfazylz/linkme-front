@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import "./SwipeButtons.css";
 
 import IconButton from "@material-ui/core/IconButton";
@@ -9,28 +9,20 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import FlashOnIcon from "@material-ui/icons/FlashOn";
 
 class SwipeButtons extends Component {
-  state = {  }
-  render() { 
+  state = {};
+
+  render() {
     return (
       <div className="swipeButtons">
-        <IconButton className="swipeButtons_repeat">
-          <ReplayIcon fontSize="large" />
-        </IconButton>
         <IconButton className="swipeButtons_left">
           <CloseIcon fontSize="large" />
         </IconButton>
-        <IconButton className="swipeButtons_star">
-          <StarRateIcon fontSize="large" />
-        </IconButton>
         <IconButton className="swipeButtons_right">
           <FavoriteIcon fontSize="large" />
-        </IconButton>
-        <IconButton className="swipeButtons_lightning">
-          <FlashOnIcon fontSize="large" />
         </IconButton>
       </div>
     );
   }
 }
- 
+
 export default SwipeButtons;

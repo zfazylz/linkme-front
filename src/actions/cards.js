@@ -1,12 +1,13 @@
-import ProfileService from "../services/profile.service";
-import { GET_PROFILE, GET_PROFILE_FAIL, SET_MESSAGE } from "./types";
+import CardService from "../services/card.service";
 
-export const profile = () => (dispatch) => {
-  return ProfileService.myProfile().then(
+import { GET_CARDS, GET_CARDS_FAIL } from "./types";
+
+export const myCards = (pageNum) => (dispatch) => {
+  return CardService.myCards(pageNum).then(
     (data) => {
       dispatch({
-        type: GET_PROFILE,
-        payload: { profile: data },
+        type: GET_CARDS,
+        payload: { cards: data },
       });
       return Promise.resolve();
     },
@@ -17,7 +18,7 @@ export const profile = () => (dispatch) => {
         error.toString();
 
       dispatch({
-        type: GET_PROFILE_FAIL,
+        type: GET_CARDS_FAIL,
       });
 
       dispatch({

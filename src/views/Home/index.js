@@ -1,25 +1,21 @@
 import Header from "../../components/Header/Header";
-import React, {Component} from "react";
+import React, { Component } from "react";
 import TinderCards from "../../components/TinderCards/TinderCards";
-import SwipeButtons from "../../components/SwipeButtons/SwipeButtons";
-import {Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class HomeView extends Component {
   render() {
-    console.log(this.props);
-    // const {user} = this.props;
+    // const { user } = this.props;
     // if (!user) {
-    //   return <Redirect to="/login"/>;
+    //   return <Redirect to="/login" />;
     // }
     return (
       <div>
-        <Header/>
-        <TinderCards/>
-        <SwipeButtons/>
+        <Header />
+        <TinderCards />
       </div>
-    )
+    );
   }
-
 }
 
 export default HomeView;

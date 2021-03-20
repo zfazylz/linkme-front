@@ -9,3 +9,6 @@ export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 
 export const GET_PROFILE = "GET_PROFILE";
 export const GET_PROFILE_FAIL = "GET_PROFILE_FAIL";
+
+export const GET_CARDS = "GET_CARDS";
+export const GET_CARDS_FAIL = "GET_CARDS_FAIL";
