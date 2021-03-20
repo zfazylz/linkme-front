@@ -10,6 +10,10 @@ class ProfileService {
   myOffers() {
     return axios.get(API_URL + "profile/likes/", { headers: authHeader() });
   }
+
+  matchList() {
+    return axios.get(API_URL + "profile/matches/", { headers: authHeader() });
+  }
 }
 
 export default new ProfileService();

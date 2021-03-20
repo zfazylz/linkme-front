@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import "./Chats.css";
 import Chat from "./Chat";
 import ProfileService from "../../services/profile.service";
 
 class Chats extends Component {
-  state = { likes: [] };
+  state = {likes: []};
 
   componentDidMount() {
     this.getLikes(1);
@@ -33,15 +33,19 @@ class Chats extends Component {
 
   render() {
     return (
-      <div className="chats">
-        {this.state.likes?.results?.map((person, index) => (
-          <Chat
-            name={person.username}
-            profilePic={person.photos[0]}
-            timestamp={person.liked_at}
-            key={person.user_id}
-          />
-        ))}
+      <div className="emptyCardContainer">
+        <h1>Показали симпатию</h1>
+
+        <div className="chats">
+          {this.state.likes?.results?.map((person, _) => (
+            <Chat
+              name={person.username}
+              profilePic={person.photos[0]}
+              timestamp={person.liked_at}
+              key={person.user_id}
+            />
+          ))}
+        </div>
       </div>
     );
   }
