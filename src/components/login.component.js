@@ -6,7 +6,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
 import {connect} from "react-redux";
-import {login} from "../actions/auth";
+import {login, loginViaAITU} from "../actions/auth";
 import aituBridge from "@btsd/aitu-bridge";
 
 const required = (value) => {
@@ -30,16 +30,20 @@ class Login extends Component {
       username: "",
       password: "",
       aituData: {},
+      isAITUSupported: false,
       loading: false,
     };
-
-    aituBridge.getMe().then(
-      (response) => {
-        console.log(response);
-        alert(response);
-        this.setState({aituData: response});
-      }
-    );
+    if (aituBridge.isSupported()) {
+      this.setState({loading: true})
+      this.setState({isAITUSupported: true})
+      aituBridge.getMe().then(
+        (response) => {
+          this.setState({aituData: response});
+          this.setState({loading: false});
+          this.handleAITULogin();
+        }
+      );
+    }
   }
 
   onChangeUsername(e) {
@@ -83,11 +87,46 @@ class Login extends Component {
     }
   }
 
+  handleAITULogin() {
+    this.setState({
+      loading: true,
+    });
+    const {aituData} = this.state;
+    const {dispatch, history} = this.props;
+
+    if (this.checkBtn.context._errors.length === 0) {
+      dispatch(loginViaAITU(aituData))
+        .then(() => {
+          history.push("/");
+          window.location.reload();
+        })
+        .catch(() => {
+          this.setState({
+            loading: false
+          });
+        });
+    } else {
+      this.setState({
+        loading: false,
+      });
+    }
+  }
+
   render() {
     const {isLoggedIn, message} = this.props;
 
     if (isLoggedIn) {
       return <Redirect to="/"/>;
+    }
+    if (this.state.isAITUSupported) {
+      if (this.state.loading)
+        return (
+          <div className="card">
+            <h3>Загрузка...</h3>
+          </div>
+        )
+      else
+        return <div/>
     }
 
     return (
