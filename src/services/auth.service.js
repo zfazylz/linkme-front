@@ -1,16 +1,17 @@
 import axios from "axios";
-
-const API_URL = "https://linkme-back.herokuapp.com/auth/api/";
+import {API_URL, isResponseOK} from "."
 
 class AuthService {
   login(username, password) {
     return axios
-      .post(API_URL + "token/", { username, password })
+      .post(
+        API_URL + "auth/api/token/",
+        {email: username, password},
+      )
       .then((response) => {
-        if (response.data.accessToken) {
+        if (isResponseOK(response)) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
-
         return response.data;
       });
   }
