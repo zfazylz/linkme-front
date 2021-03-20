@@ -33,7 +33,6 @@ export default class Profile extends Component {
 
   render() {
     const profile = this.state.content;
-    console.log(profile);
     return (
       <div>
         <h3>{profile?.username}</h3>
