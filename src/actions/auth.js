@@ -45,14 +45,13 @@ export const register = (username, email, password) => (dispatch) => {
   );
 };
 
-export const login = (username, password) => (dispatch) => {
-  return AuthService.login(username, password).then(
+export const login = (username, password, aituData) => (dispatch) => {
+  return AuthService.login(username, password, aituData).then(
     (data) => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: {user: data},
       });
-      console.log(data.message);
       return Promise.resolve();
     },
     (error) => {
