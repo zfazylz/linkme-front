@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import React, {Component} from "react";
+import {Redirect} from 'react-router-dom';
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-import { connect } from "react-redux";
-import { login } from "../actions/auth";
+import {connect} from "react-redux";
+import {login} from "../actions/auth";
 
 const required = (value) => {
   if (!value) {
@@ -28,6 +28,7 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
+      aituData: null,
       loading: false,
     };
   }
@@ -53,7 +54,7 @@ class Login extends Component {
 
     this.form.validateAll();
 
-    const { dispatch, history } = this.props;
+    const {dispatch, history} = this.props;
 
     if (this.checkBtn.context._errors.length === 0) {
       dispatch(login(this.state.username, this.state.password))
@@ -74,10 +75,10 @@ class Login extends Component {
   }
 
   render() {
-    const { isLoggedIn, message } = this.props;
+    const {isLoggedIn, message} = this.props;
 
     if (isLoggedIn) {
-      return <Redirect to="/" />;
+      return <Redirect to="/"/>;
     }
 
     return (
@@ -139,7 +140,7 @@ class Login extends Component {
               </div>
             )}
             <CheckButton
-              style={{ display: "none" }}
+              style={{display: "none"}}
               ref={(c) => {
                 this.checkBtn = c;
               }}
@@ -152,8 +153,8 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  const { isLoggedIn } = state.auth;
-  const { message } = state.message;
+  const {isLoggedIn} = state.auth;
+  const {message} = state.message;
   return {
     isLoggedIn,
     message
