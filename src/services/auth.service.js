@@ -2,11 +2,11 @@ import axios from "axios";
 import {API_URL, isResponseOK} from "."
 
 class AuthService {
-  login(username, password) {
+  login(username, password, aituData) {
     return axios
       .post(
         API_URL + "auth/api/token/",
-        {email: username, password},
+        {email: username, password, aitu_data: aituData},
       )
       .then((response) => {
         if (isResponseOK(response)) {

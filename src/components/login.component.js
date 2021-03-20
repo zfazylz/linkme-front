@@ -7,6 +7,7 @@ import CheckButton from "react-validation/build/button";
 
 import {connect} from "react-redux";
 import {login} from "../actions/auth";
+import aituBridge from "@btsd/aitu-bridge";
 
 const required = (value) => {
   if (!value) {
@@ -28,9 +29,17 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      aituData: null,
+      aituData: {},
       loading: false,
     };
+
+    aituBridge.getMe().then(
+      (response) => {
+        console.log(response);
+        alert(response);
+        this.setState({aituData: response});
+      }
+    );
   }
 
   onChangeUsername(e) {
@@ -57,7 +66,7 @@ class Login extends Component {
     const {dispatch, history} = this.props;
 
     if (this.checkBtn.context._errors.length === 0) {
-      dispatch(login(this.state.username, this.state.password))
+      dispatch(login(this.state.username, this.state.password, this.state.aituData))
         .then(() => {
           history.push("/");
           window.location.reload();
