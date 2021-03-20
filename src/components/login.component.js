@@ -32,6 +32,14 @@ class Login extends Component {
       aituData: {},
       loading: false,
     };
+
+    aituBridge.getMe().then(
+      (response) => {
+        console.log(response);
+        alert(response);
+        this.setState({aituData: response});
+      }
+    );
   }
 
   onChangeUsername(e) {
@@ -77,13 +85,7 @@ class Login extends Component {
 
   render() {
     const {isLoggedIn, message} = this.props;
-    aituBridge.getMe().then(
-      (response) => {
-        console.log(response);
-        alert(response);
-        this.setState({aituData: response});
-      }
-    );
+
     if (isLoggedIn) {
       return <Redirect to="/"/>;
     }
