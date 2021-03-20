@@ -6,6 +6,7 @@ import "./App.css";
 import ChatListView from "./ChatList";
 import HomeView from "./Home";
 import Login from "../components/login.component";
+import ProfileView from "./Profile";
 
 class App extends Component {
 
@@ -30,6 +31,9 @@ class App extends Component {
             <Route path="/chat">
               <Header backButton="/"/>
               <Chats/>
+            </Route>
+            <Route path="/profile">
+              <ProfileView/>
             </Route>
             <Route exact path="/" component={HomeView}/>
           </Switch>

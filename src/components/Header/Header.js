@@ -7,33 +7,35 @@ import IconButton from "@material-ui/core/IconButton";
 import {Link, useHistory} from "react-router-dom";
 
 const Header = ({backButton}) => {
-    const history = useHistory();
-    return (
-        <div className="header">
-            {backButton ? (
-                <IconButton onClick={() => history.replace(backButton)}>
-                    <ArrowBackIosIcon className="header_icon" fontSize="large"/>
-                </IconButton>
-            ) : (
-                <IconButton>
-                    <PersonIcon className="header_icon" fontSize="large"/>
-                </IconButton>
-            )}
+  const history = useHistory();
+  return (
+    <div className="header">
+      {backButton ? (
+        <IconButton onClick={() => history.replace(backButton)}>
+          <ArrowBackIosIcon className="header_icon" fontSize="large"/>
+        </IconButton>
+      ) : (
+        <Link to="/profile">
+          <IconButton>
+            <PersonIcon className="header_icon" fontSize="large"/>
+          </IconButton>
+        </Link>
+      )}
 
-            <Link to="/">
-                <img
-                    className="header_logo"
-                    src={"/logo.png"}
-                    alt="LinkMe App"
-                />
-            </Link>
-            <Link to="/chat">
-                <IconButton>
-                    <ForumIcon className="header_icon" fontSize="large"/>
-                </IconButton>
-            </Link>
-        </div>
-    );
+      <Link to="/">
+        <img
+          className="header_logo"
+          src={"/logo.png"}
+          alt="LinkMe App"
+        />
+      </Link>
+      <Link to="/chat">
+        <IconButton>
+          <ForumIcon className="header_icon" fontSize="large"/>
+        </IconButton>
+      </Link>
+    </div>
+  );
 };
- 
+
 export default Header;
