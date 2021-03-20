@@ -9,11 +9,10 @@ class MatchProfile extends Component {
   render() {
     const child = this.props;
     return (
-      <Link to={
+      <a href={
         child.aituUID ?
-          `https://i2.app.link/open_chat_with?user_id=${child.aituUID}"` : "/matches"
-      }
-      >
+          `https://i2.app.link/open_chat_with?user_id=${child.aituUID}` : "/matches"
+      }>
         <div className="chat">
           <Avatar
             className="chat_image"
@@ -25,7 +24,7 @@ class MatchProfile extends Component {
           </div>
           <p className="chat_timestamp">{child.timestamp}</p>
         </div>
-      </Link>
+      </a>
     );
   }
 }
