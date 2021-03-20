@@ -76,6 +76,38 @@ export const login = (username, password, aituData) => (dispatch) => {
   );
 };
 
+
+export const loginViaAITU = (aituData) => (dispatch) => {
+  return AuthService.loginAITU(aituData).then(
+    (data) => {
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: {user: data},
+      });
+      return Promise.resolve();
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.detail) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: LOGIN_FAIL,
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+};
+
 export const logout = () => (dispatch) => {
   console.log('LOGOUT');
   AuthService.logout();

@@ -16,6 +16,20 @@ class AuthService {
       });
   }
 
+  loginAITU(aituData) {
+    return axios
+      .post(
+        API_URL + "auth/api/aitu/token/",
+        {aitu_data: aituData},
+      )
+      .then((response) => {
+        if (isResponseOK(response)) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+        }
+        return response.data;
+      });
+  }
+
   logout() {
     localStorage.removeItem("user");
   }
