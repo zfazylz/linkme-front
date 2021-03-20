@@ -120,6 +120,10 @@ class Login extends Component {
 
   render() {
     const {isLoggedIn, message} = this.props;
+    const handleAITULoginOnClick = (e) => {
+      e.preventDefault();
+      this.handleAITULogin()
+    }
     if (isLoggedIn) {
       return <Redirect to="/"/>;
     }
@@ -135,7 +139,10 @@ class Login extends Component {
       return (
         <div className="tinderCards_cardContainer">
           <div className="card emptyCardContainer">
-            <Link to="" onClick={this.tryLoginViaAITU}>
+            <Link
+              to=""
+              onClick={handleAITULoginOnClick}
+            >
               <IconButton>
                 <ExitToAppIcon className="header_icon" fontSize="large"/>
               </IconButton>
