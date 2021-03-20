@@ -33,10 +33,30 @@ class Login extends Component {
       isAITUSupported: false,
       loading: false,
     };
-    alert(aituBridge.isSupported())
+  }
+
+  onChangeUsername(e) {
+    this.setState({
+      username: e.target.value,
+    });
+  }
+
+  componentDidMount() {
+    this.tryLoginViaAITU()
+  }
+
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value,
+    });
+  }
+
+  tryLoginViaAITU() {
     if (aituBridge.isSupported()) {
       this.setState({loading: true})
       this.setState({isAITUSupported: true})
+      this.setState({loading: false});
+      this.handleAITULogin();
       aituBridge.getMe().then(
         (response) => {
           this.setState({aituData: response});
@@ -47,17 +67,6 @@ class Login extends Component {
     }
   }
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value,
-    });
-  }
-
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value,
-    });
-  }
 
   handleLogin(e) {
     e.preventDefault();
@@ -89,47 +98,36 @@ class Login extends Component {
   }
 
   handleAITULogin() {
-    alert('aitu login');
     this.setState({
       loading: true,
     });
     const {aituData} = this.state;
     const {dispatch, history} = this.props;
 
-    if (this.checkBtn.context._errors.length === 0) {
-      dispatch(loginViaAITU(aituData))
-        .then(() => {
-          history.push("/");
-          window.location.reload();
-        })
-        .catch(() => {
-          this.setState({
-            loading: false
-          });
+    dispatch(loginViaAITU(aituData))
+      .then(() => {
+        history.push("/");
+        window.location.reload();
+      })
+      .catch(() => {
+        this.setState({
+          loading: false
         });
-    } else {
-      this.setState({
-        loading: false,
       });
-    }
   }
 
   render() {
     const {isLoggedIn, message} = this.props;
-
     if (isLoggedIn) {
       return <Redirect to="/"/>;
     }
-    if (this.state.isAITUSupported) {
-      if (this.state.loading)
-        return (
-          <div className="card">
-            <h3>Загрузка...</h3>
-          </div>
-        )
-      else
-        return <div/>
-    }
+
+    if (this.state.loading)
+      return (
+        <div className="card">
+          <h3>Загрузка...</h3>
+        </div>
+      )
 
     return (
       <div className="col-md-12">
