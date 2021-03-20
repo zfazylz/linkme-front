@@ -6,7 +6,7 @@ class AuthService {
     return axios
       .post(
         API_URL + "auth/api/token/",
-        {email: username, password, aitu_data: aituData},
+        {username, password, aitu_data: aituData},
       )
       .then((response) => {
         if (isResponseOK(response)) {

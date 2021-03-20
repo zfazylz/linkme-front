@@ -7,7 +7,7 @@
   border-radius: 20px;
   background-size: cover;
   background-position: center;
-  box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 18px 53px 0 rgba(0, 0, 0, 0.3);
 }
 
 .card > h3 {
@@ -27,6 +27,8 @@
 }
 
 .emptyCardContainer {
+  align-items: center;
+  align-content: center;
   text-align: center;
   justify-content: center;
   margin-top: 20vh;

@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -8,6 +8,8 @@ import CheckButton from "react-validation/build/button";
 import {connect} from "react-redux";
 import {login, loginViaAITU} from "../actions/auth";
 import aituBridge from "@btsd/aitu-bridge";
+import IconButton from "@material-ui/core/IconButton";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const required = (value) => {
   if (!value) {
@@ -42,7 +44,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    this.tryLoginViaAITU()
+    // this.tryLoginViaAITU()
   }
 
   onChangePassword(e) {
@@ -124,14 +126,30 @@ class Login extends Component {
 
     if (this.state.loading)
       return (
-        <div className="card">
-          <h3>Загрузка...</h3>
+        <div className="emptyCardContainer">
+          <h1>Загрузка....</h1>
+        </div>
+      )
+
+    if (aituBridge.isSupported())
+      return (
+        <div className="tinderCards_cardContainer">
+          <div className="card emptyCardContainer">
+            <Link to="" onClick={this.tryLoginViaAITU}>
+              <IconButton>
+                <ExitToAppIcon className="header_icon" fontSize="large"/>
+              </IconButton>
+              <h1>
+                Войти
+              </h1>
+            </Link>
+          </div>
         </div>
       )
 
     return (
-      <div className="col-md-12">
-        <div className="card card-container">
+      <div className="tinderCards_cardContainer">
+        <div className="card emptyCardContainer">
           <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             alt="profile-img"
@@ -174,7 +192,7 @@ class Login extends Component {
                 disabled={this.state.loading}
               >
                 {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
+                  <span className="spinner-border spinner-border-sm"/>
                 )}
                 <span>Login</span>
               </button>
