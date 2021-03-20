@@ -3,14 +3,19 @@ import React, {Component} from "react";
 import TinderCards from "../../components/TinderCards/TinderCards";
 import SwipeButtons from "../../components/SwipeButtons/SwipeButtons";
 import {Redirect} from "react-router-dom";
+import {connect} from "react-redux";
+import "./HomeView.css"
 
 class HomeView extends Component {
   render() {
-    console.log(this.props);
-    // const {user} = this.props;
-    // if (!user) {
-    //   return <Redirect to="/login"/>;
-    // }
+    const {isLoggedIn} = this.props;
+    if (!isLoggedIn) {
+      return (
+        <div>
+          <Redirect to="/login"/>
+        </div>
+      );
+    }
     return (
       <div>
         <Header/>
@@ -22,4 +27,9 @@ class HomeView extends Component {
 
 }
 
-export default HomeView;
+function mapStateToProps(state) {
+  const {isLoggedIn} = state.auth;
+  return {isLoggedIn}
+}
+
+export default connect(mapStateToProps)(HomeView);
