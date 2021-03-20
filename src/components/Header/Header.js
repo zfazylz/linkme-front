@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import "./Header.css";
 import PersonIcon from "@material-ui/icons/Person";
 import ForumIcon from "@material-ui/icons/Forum";
+import ChatIcon from "@material-ui/icons/Chat";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import IconButton from "@material-ui/core/IconButton";
 import {Link} from "react-router-dom";
@@ -33,12 +34,10 @@ class Header extends Component {
             <PersonIcon className="header_icon" fontSize="large"/>
           </IconButton>
         </Link>
-        <Link to="/">
-          <img
-            className="header_logo"
-            src={"/logo.png"}
-            alt="LinkMe App"
-          />
+        <Link to="/matches">
+          <IconButton>
+            <ChatIcon className="header_icon" fontSize="large"/>
+          </IconButton>
         </Link>
         <Link to="" onClick={this.logOutLink}>
           <IconButton>

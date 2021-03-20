@@ -7,6 +7,7 @@ import ChatListView from "./ChatList";
 import HomeView from "./Home";
 import Login from "../components/login.component";
 import ProfileView from "./Profile";
+import MatchListDiv from "./MatchList/MatchListDiv";
 
 class App extends Component {
 
@@ -32,6 +33,7 @@ class App extends Component {
               <Header backButton="/"/>
               <Chats/>
             </Route>
+            <Route exact path="/matches" component={MatchListDiv}/>
             <Route path="/profile">
               <ProfileView/>
             </Route>
@@ -41,6 +43,6 @@ class App extends Component {
       </div>
     );
   }
-};
+}
 
 export default App;
