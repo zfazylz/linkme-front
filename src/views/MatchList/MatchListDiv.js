@@ -15,7 +15,7 @@ export default class MatchListDiv extends Component {
           avatar_url: null,
           description: "...",
           aitu_uid: null,
-          id: -1,
+          user_id: -1,
         },
 
       ]
