@@ -1,23 +1,28 @@
-import React, { Component, useMemo } from "react";
-import { connect } from "react-redux";
+import React, {Component} from "react";
+import {connect} from "react-redux";
 import TinderCard from "react-tinder-card";
 import "./TinderCards.css";
 import CardService from "../../services/card.service";
 import SwipeButtons from "../../components/SwipeButtons/SwipeButtons";
 
 class TinderCards extends Component {
-  state = { cards: [], remainingCards: 0 };
+  state = {cards: [], remainingCards: 0};
+
   componentDidMount() {
     this.loadCards(1);
   }
 
   evaluateCard = (uid, dir) => {
-    let mark = dir == "right";
+    let mark = dir === "right";
 
     CardService.evaluateCard(uid, mark).then(
       (response) => {
         console.log(response.data);
-        if (--this.state.remainingCards == 0) {
+        this.setState({
+            remainingCards: this.state.remainingCards - 1
+          }
+        );
+        if (this.state.remainingCards === 0) {
           this.loadCards(1);
         }
       },
@@ -67,7 +72,7 @@ class TinderCards extends Component {
               preventSwipe={["up", "down"]}
             >
               <div
-                style={{ backgroundImage: `url(${person.photos[0]})` }}
+                style={{backgroundImage: `url(${person.photos[0]})`}}
                 className="card"
               >
                 <h3>{person.username}</h3>
@@ -75,14 +80,14 @@ class TinderCards extends Component {
             </TinderCard>
           ))}
         </div>
-        <SwipeButtons />
+        <SwipeButtons/>
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  const { user } = state.auth;
+  const {user} = state.auth;
   return {
     user,
   };
