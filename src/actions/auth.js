@@ -50,7 +50,7 @@ export const login = (username, password) => (dispatch) => {
     (data) => {
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: { user: data },
+        payload: {user: data},
       });
 
       return Promise.resolve();
@@ -59,7 +59,7 @@ export const login = (username, password) => (dispatch) => {
       const message =
         (error.response &&
           error.response.data &&
-          error.response.data.message) ||
+          error.response.data.detail) ||
         error.message ||
         error.toString();
 
