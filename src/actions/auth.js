@@ -77,6 +77,7 @@ export const login = (username, password, aituData) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
+  console.log('LOGOUT');
   AuthService.logout();
 
   dispatch({
