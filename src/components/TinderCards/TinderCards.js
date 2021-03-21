@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import TinderCard from "react-tinder-card";
 import "./TinderCards.css";
 import CardService from "../../services/card.service";
-import "./../SwipeButtons/SwipeButtons.css";
 
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";

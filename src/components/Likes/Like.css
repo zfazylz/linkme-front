@@ -1,0 +1,29 @@
+.like {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  height: 70px;
+  border-bottom: 1px solid #fafafa;
+}
+
+a {
+  text-decoration: none;
+  color: initial;
+}
+
+.like_details {
+  flex: 1;
+}
+
+.like_details > p {
+  color: gray;
+}
+
+.like_timestamp {
+  color: lightgray;
+}
+
+.like_image {
+  margin-right: 20px;
+}

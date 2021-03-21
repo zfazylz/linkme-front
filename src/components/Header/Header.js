@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import "./Header.css";
 import PersonIcon from "@material-ui/icons/Person";
 import ForumIcon from "@material-ui/icons/Forum";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp"
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import IconButton from "@material-ui/core/IconButton";
-import {Link} from "react-router-dom";
-import {logout} from "../../actions/auth";
-import {connect} from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../../actions/auth";
+import { connect } from "react-redux";
 
 class Header extends Component {
   constructor(props, backButton) {
@@ -30,24 +30,20 @@ class Header extends Component {
       <div className="header">
         <Link to="/profile">
           <IconButton>
-            <PersonIcon className="header_icon" fontSize="large"/>
+            <PersonIcon className="header_icon" fontSize="large" />
           </IconButton>
         </Link>
         <Link to="/">
-          <img
-            className="header_logo"
-            src={"/logo.png"}
-            alt="LinkMe App"
-          />
+          <img className="header_logo" src={"/logo.png"} alt="LinkMe App" />
         </Link>
         <Link to="" onClick={this.logOutLink}>
           <IconButton>
-            <ExitToAppIcon className="header_icon" fontSize="large"/>
+            <ExitToAppIcon className="header_icon" fontSize="large" />
           </IconButton>
         </Link>
-        <Link to="/chat">
+        <Link to="/likes">
           <IconButton>
-            <ForumIcon className="header_icon" fontSize="large"/>
+            <ForumIcon className="header_icon" fontSize="large" />
           </IconButton>
         </Link>
       </div>
@@ -56,7 +52,7 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  const {user} = state.auth;
+  const { user } = state.auth;
   return {
     user,
   };
