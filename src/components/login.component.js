@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, {Component} from "react";
+import {Link, Redirect} from "react-router-dom";
 
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
-import { connect } from "react-redux";
-import { login, loginViaAITU } from "../actions/auth";
+import {connect} from "react-redux";
+import {login, loginViaAITU} from "../actions/auth";
 import aituBridge from "@btsd/aitu-bridge";
 import IconButton from "@material-ui/core/IconButton";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -65,12 +65,12 @@ class Login extends Component {
 
   tryLoginViaAITU() {
     if (aituBridge.isSupported()) {
-      this.setState({ loading: true });
-      this.setState({ isAITUSupported: true });
-      this.setState({ loading: false });
+      this.setState({loading: true});
+      this.setState({isAITUSupported: true});
+      this.setState({loading: false});
       aituBridge.getMe().then((response) => {
-        this.setState({ aituData: response });
-        this.setState({ loading: false });
+        this.setState({aituData: response});
+        this.setState({loading: false});
         this.handleAITULogin();
       });
     }
@@ -85,7 +85,7 @@ class Login extends Component {
 
     this.form.validateAll();
 
-    const { dispatch, history } = this.props;
+    const {dispatch, history} = this.props;
 
     if (this.checkBtn.context._errors.length === 0) {
       dispatch(
@@ -111,8 +111,8 @@ class Login extends Component {
     this.setState({
       loading: true,
     });
-    const { aituData, sex } = this.state;
-    const { dispatch, history } = this.props;
+    const {aituData, sex} = this.state;
+    const {dispatch, history} = this.props;
 
     dispatch(loginViaAITU(aituData, sex))
       .then(() => {
@@ -128,13 +128,13 @@ class Login extends Component {
 
   render() {
     const instr = "Выберите ваш пол";
-    const { isLoggedIn, message } = this.props;
+    const {isLoggedIn, message} = this.props;
     const handleAITULoginOnClick = (e) => {
       e.preventDefault();
       this.tryLoginViaAITU();
     };
     if (isLoggedIn) {
-      return <Redirect to="/" />;
+      return <Redirect to="/"/>;
     }
 
     if (this.state.loading)
@@ -144,14 +144,19 @@ class Login extends Component {
         </div>
       );
     let options = [
-      { value: "M", label: "Мужчина" },
-      { value: "F", label: "Женщина" },
-      { value: "U", label: "Непонятно" },
+      {value: "M", label: "Мужчина"},
+      {value: "F", label: "Женщина"},
+      {value: "U", label: "Непонятно"},
     ];
     if (aituBridge.isSupported())
       return (
         <div className="tinderCards_cardContainer">
           <div className="card emptyCardContainer">
+            <img
+              src="/profile-icon-512.png"
+              className="profile-img-card"
+              height="200"
+            />
             <Select
               options={options}
               value={this.state.value}
@@ -160,7 +165,7 @@ class Login extends Component {
             />
             <Link to="" onClick={handleAITULoginOnClick}>
               <IconButton>
-                <ExitToAppIcon className="header_icon" fontSize="large" />
+                <ExitToAppIcon className="header_icon" fontSize="large"/>
                 Войти
               </IconButton>
             </Link>
@@ -213,7 +218,7 @@ class Login extends Component {
                 disabled={this.state.loading}
               >
                 {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm" />
+                  <span className="spinner-border spinner-border-sm"/>
                 )}
                 <span>Login</span>
               </button>
@@ -227,7 +232,7 @@ class Login extends Component {
               </div>
             )}
             <CheckButton
-              style={{ display: "none" }}
+              style={{display: "none"}}
               ref={(c) => {
                 this.checkBtn = c;
               }}
@@ -240,8 +245,8 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-  const { isLoggedIn } = state.auth;
-  const { message } = state.message;
+  const {isLoggedIn} = state.auth;
+  const {message} = state.message;
   return {
     isLoggedIn,
     message,
