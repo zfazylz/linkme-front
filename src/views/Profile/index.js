@@ -1,10 +1,10 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import ProfileService from "../../services/profile.service";
 import Header from "../../components/Header/Header";
-import {logout} from "../../actions/auth";
+import { logout } from "../../actions/auth";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class ProfileView extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class ProfileView extends Component {
     this.logOutLink = this.logOutLink.bind(this);
 
     this.state = {
-      content: null
+      content: null,
     };
   }
 
@@ -22,19 +22,19 @@ class ProfileView extends Component {
 
   componentDidMount() {
     ProfileService.myProfile().then(
-      response => {
+      (response) => {
         this.setState({
-          content: response.data
+          content: response.data,
         });
       },
-      error => {
+      (error) => {
         this.setState({
           content:
             (error.response &&
               error.response.data &&
               error.response.data.message) ||
             error.message ||
-            error.toString()
+            error.toString(),
         });
       }
     );
@@ -44,25 +44,23 @@ class ProfileView extends Component {
     const profile = this.state.content;
     return (
       <div>
-        <Header backButton={false}/>
+        <Header backButton={false} />
         <div className="emptyCardContainer">
           <h1>Профиль</h1>
           <div
-            style={{backgroundImage: `url(${profile?.avatar_url})`}}
+            style={{
+              backgroundImage: `url(${profile?.avatar_url})`,
+            }}
             className="card"
           >
             <h3>{profile?.username}</h3>
             <p>{profile?.description}</p>
           </div>
-        </div>
-        <div className="swipeButtons">
-          <Link
-            to=""
-            onClick={this.logOutLink}
-            className="swipeButtons_left"
-          >
-            <ExitToAppIcon fontSize="large"/>
-          </Link>
+          <div className="swipeButtons">
+            <Link to="" onClick={this.logOutLink} className="swipeButtons_left">
+              <ExitToAppIcon fontSize="large" />
+            </Link>
+          </div>
         </div>
       </div>
     );
