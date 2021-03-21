@@ -1,7 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import ProfileService from "../../services/profile.service";
-import "../ChatList/ChatScreen.css";
 import "./MatchList.css";
+import "../../components/Likes/Like.css";
 import Header from "../../components/Header/Header";
 import MatchProfile from "./MatchProfile";
 
@@ -17,29 +17,25 @@ export default class MatchListDiv extends Component {
           aitu_uid: null,
           user_id: -1,
         },
-
-      ]
+      ],
     };
-
   }
 
   componentDidMount() {
-    ProfileService.matchList().then(
-      (response) => {
-        this.setState({matchList: response.data.results})
-      }
-    )
+    ProfileService.matchList().then((response) => {
+      this.setState({ matchList: response.data.results });
+    });
   }
 
   render() {
-    const {matchList} = this.state;
+    const { matchList } = this.state;
 
     return (
       <div>
-        <Header/>
-        <div className="emptyCardContainer">
-          <h1>Взаимные симпатии</h1>
-          <div className="chats ">
+        <Header />
+        <div>
+          <h1 className="center">Взаимные симпатии</h1>
+          <div className="chat">
             {matchList.map((profile, _) => (
               <MatchProfile
                 name={profile.username}
@@ -54,4 +50,4 @@ export default class MatchListDiv extends Component {
       </div>
     );
   }
-};
+}

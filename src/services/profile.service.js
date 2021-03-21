@@ -14,6 +14,14 @@ class ProfileService {
   matchList() {
     return axios.get(API_URL + "profile/matches/", { headers: authHeader() });
   }
+
+  rejectUser(uid) {
+    return axios.put(
+      API_URL + "profile/reject-likes/" + uid,
+      {},
+      { headers: authHeader() }
+    );
+  }
 }
 
 export default new ProfileService();

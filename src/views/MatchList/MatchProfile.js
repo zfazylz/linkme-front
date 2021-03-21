@@ -1,7 +1,6 @@
-import React, {Component} from "react";
-// import "../../components/Chats/Chat.css";
+import React, { Component } from "react";
+import "../../components/Likes/Like.css";
 import Avatar from "@material-ui/core/Avatar";
-// import {Link} from "react-router-dom";
 
 class MatchProfile extends Component {
   state = {};
@@ -9,20 +8,23 @@ class MatchProfile extends Component {
   render() {
     const child = this.props;
     return (
-      <a href={
-        child.aituUID ?
-          `https://i2.app.link/open_chat_with?user_id=${child.aituUID}` : "/matches"
-      }>
-        <div className="chat">
+      <a
+        href={
+          child.aituUID
+            ? `https://i2.app.link/open_chat_with?user_id=${child.aituUID}`
+            : "/matches"
+        }
+      >
+        <div className="like">
           <Avatar
-            className="chat_image"
+            className="like_image"
             alt={child.name}
             src={child.profilePic}
           />
-          <div className="chat_details">
+          <div className="like_details">
             <h2>{child.name}</h2>
           </div>
-          <p className="chat_timestamp">{child.timestamp}</p>
+          <p className="like_timestamp">{child.timestamp}</p>
         </div>
       </a>
     );

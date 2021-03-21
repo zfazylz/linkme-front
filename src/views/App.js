@@ -3,7 +3,6 @@ import Header from "../components/Header/Header";
 import Likes from "../components/Likes/Likes";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
-import ChatListView from "./ChatList";
 import HomeView from "./Home";
 import Login from "../components/login.component";
 import ProfileView from "./Profile";
@@ -25,9 +24,6 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/login" component={Login} />
-            <Route path="/chat/:person">
-              <ChatListView />
-            </Route>
             <Route path="/likes">
               <Header backButton="/" />
               <Likes />

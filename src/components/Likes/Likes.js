@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Likes.css";
 import Like from "./Like";
 import ProfileService from "../../services/profile.service";
+import CardService from "../../services/card.service";
 import {
   ActionAnimations,
   SwipeableList,
@@ -43,9 +44,9 @@ class Likes extends Component {
     );
   }
 
-  deleteItemById = (ind) => {
+  deleteItemById = (uid) => {
     let anime = {
-      results: this.state.likes.results.filter((like, lind) => lind !== ind),
+      results: this.state.likes.results.filter((like) => like.user_id !== uid),
     };
     this.setState({
       likes: anime,
@@ -53,19 +54,58 @@ class Likes extends Component {
     console.log(this.state.likes);
   };
 
-  swipeRightOptions = (ind) => ({
+  swipeRightOptions = (uid) => ({
     content: <BasicSwipeContent label="Delete" position="left" />,
     actionAnimation: this.state.contentAnimation,
-    action: () => this.deleteItemById(ind),
+    action: () => this.likeUser(uid),
   });
 
-  swipeLeftOptions = (ind) => ({
+  swipeLeftOptions = (uid) => ({
     content: <BasicSwipeContent label="Delete" position="right" />,
     actionAnimation: this.state.contentAnimation,
-    action: () => this.deleteItemById(ind),
+    action: () => this.rejectUser(uid),
   });
 
+  likeUser = (uid) => {
+    this.deleteItemById(uid);
+    CardService.evaluateCard(uid, true).then(
+      (response) => {
+        console.log(response.data);
+      },
+      (error) => {
+        this.setState({
+          likes:
+            (error.response &&
+              error.response.data &&
+              error.response.data.detail) ||
+            error.message ||
+            error.toString(),
+        });
+      }
+    );
+  };
+
+  rejectUser = (uid) => {
+    this.deleteItemById(uid);
+    ProfileService.rejectUser(uid).then(
+      (response) => {
+        console.log(response.data);
+      },
+      (error) => {
+        this.setState({
+          likes:
+            (error.response &&
+              error.response.data &&
+              error.response.data.detail) ||
+            error.message ||
+            error.toString(),
+        });
+      }
+    );
+  };
+
   render() {
+    console.log(ProfileService.rejectUser);
     const threshold = 0.33;
     const transitionTimeout = 1500;
     return (
@@ -90,8 +130,8 @@ class Likes extends Component {
                 <SwipeableListItem
                   key={ind}
                   scrollStartThreshold={scrollStartThreshold}
-                  swipeLeft={this.swipeLeftOptions(ind)}
-                  swipeRight={this.swipeRightOptions(ind)}
+                  swipeLeft={this.swipeLeftOptions(person.user_id)}
+                  swipeRight={this.swipeRightOptions(person.user_id)}
                   swipeStartThreshold={swipeStartThreshold}
                   threshold={threshold}
                 >
