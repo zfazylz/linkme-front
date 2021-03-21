@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Header.css";
 import PersonIcon from "@material-ui/icons/Person";
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from "@material-ui/icons/Search";
 import GradeIcon from "@material-ui/icons/Grade";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import IconButton from "@material-ui/core/IconButton";
@@ -45,14 +45,14 @@ class Header extends Component {
             <PersonIcon className="header_icon" fontSize="large" />
           </IconButton>
         </Link>
-        <Link to="/matches">
-          <IconButton>
-            <GradeIcon className="header_icon" fontSize="large" />
-          </IconButton>
-        </Link>
         <Link to="/likes">
           <IconButton>
             <FavoriteIcon className="header_icon" fontSize="large" />
+          </IconButton>
+        </Link>
+        <Link to="/matches">
+          <IconButton>
+            <GradeIcon className="header_icon" fontSize="large" />
           </IconButton>
         </Link>
       </div>

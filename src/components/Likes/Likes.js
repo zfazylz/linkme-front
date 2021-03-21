@@ -11,6 +11,8 @@ import {
 import "@sandstreamdev/react-swipeable-list/dist/styles.css";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import BasicSwipeContent from "./BasicSwipeContent";
+import { connect } from "react-redux";
+import { Redirect } from "react-router";
 
 class Likes extends Component {
   state = {
@@ -105,6 +107,14 @@ class Likes extends Component {
   };
 
   render() {
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn) {
+      return (
+        <div>
+          <Redirect to="/login" />
+        </div>
+      );
+    }
     console.log(ProfileService.rejectUser);
     const threshold = 0.33;
     const transitionTimeout = 1500;
@@ -150,5 +160,9 @@ class Likes extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  const { isLoggedIn } = state.auth;
+  return { isLoggedIn };
+}
 
-export default Likes;
+export default connect(mapStateToProps)(Likes);

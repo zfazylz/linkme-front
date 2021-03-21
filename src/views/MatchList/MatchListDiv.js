@@ -4,8 +4,10 @@ import "./MatchList.css";
 import "../../components/Likes/Like.css";
 import Header from "../../components/Header/Header";
 import MatchProfile from "./MatchProfile";
+import { connect } from "react-redux";
+import { Redirect } from "react-router";
 
-export default class MatchListDiv extends Component {
+class MatchListDiv extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,6 +30,14 @@ export default class MatchListDiv extends Component {
   }
 
   render() {
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn) {
+      return (
+        <div>
+          <Redirect to="/login" />
+        </div>
+      );
+    }
     const { matchList } = this.state;
 
     return (
@@ -51,3 +61,9 @@ export default class MatchListDiv extends Component {
     );
   }
 }
+function mapStateToProps(state) {
+  const { isLoggedIn } = state.auth;
+  return { isLoggedIn };
+}
+
+export default connect(mapStateToProps)(MatchListDiv);

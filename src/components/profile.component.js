@@ -1,31 +1,33 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 // import {Redirect} from 'react-router-dom';
 import ProfileService from "../services/profile.service";
+import { connect } from "react-redux";
+import { Redirect } from "react-router";
 
-export default class Profile extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      content: null
+      content: null,
     };
   }
 
   componentDidMount() {
     ProfileService.myProfile().then(
-      response => {
+      (response) => {
         this.setState({
-          content: response.data
+          content: response.data,
         });
       },
-      error => {
+      (error) => {
         this.setState({
           content:
             (error.response &&
               error.response.data &&
               error.response.data.message) ||
             error.message ||
-            error.toString()
+            error.toString(),
         });
       }
     );
@@ -41,3 +43,10 @@ export default class Profile extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const { isLoggedIn } = state.auth;
+  return { isLoggedIn };
+}
+
+export default connect(mapStateToProps)(Profile);
