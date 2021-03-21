@@ -162,6 +162,7 @@ class Login extends Component {
               value={this.state.value}
               onChange={this.onChangeSex.bind(this)}
               placeholder={instr}
+              isSearchable={false}
             />
             <Link to="" onClick={handleAITULoginOnClick}>
               <IconButton>
