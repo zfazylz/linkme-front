@@ -58,7 +58,6 @@ class Login extends Component {
       this.setState({loading: true})
       this.setState({isAITUSupported: true})
       this.setState({loading: false});
-      this.handleAITULogin();
       aituBridge.getMe().then(
         (response) => {
           this.setState({aituData: response});
@@ -122,7 +121,7 @@ class Login extends Component {
     const {isLoggedIn, message} = this.props;
     const handleAITULoginOnClick = (e) => {
       e.preventDefault();
-      this.handleAITULogin()
+      this.tryLoginViaAITU()
     }
     if (isLoggedIn) {
       return <Redirect to="/"/>;

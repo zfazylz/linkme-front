@@ -31,7 +31,14 @@
   align-content: center;
   text-align: center;
   justify-content: center;
-  margin-top: 20vh;
+  margin-top: 2vh;
+}
+
+.emptyCardContainer > div {
+  align-self: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto
 }
 
 .swipeButtons {

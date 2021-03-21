@@ -2,14 +2,19 @@ import React, { Component } from "react";
 import "./Header.css";
 import PersonIcon from "@material-ui/icons/Person";
 import ForumIcon from "@material-ui/icons/Forum";
+<<<<<<< HEAD
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+=======
+import ChatIcon from "@material-ui/icons/Chat";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp"
+>>>>>>> 11de477aee6eb7bd7c7954c4a6f84aa0cd2382da
 import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import { logout } from "../../actions/auth";
 import { connect } from "react-redux";
 
 class Header extends Component {
-  constructor(props, backButton) {
+  constructor(props, backButton = false) {
     super(props);
     this.logOutLink = this.logOutLink.bind(this);
 
@@ -18,7 +23,7 @@ class Header extends Component {
       showAdminBoard: false,
       currentUser: undefined,
     };
-    this.backButton = backButton;
+    this.backButton = backButton
   }
 
   logOutLink() {
@@ -26,19 +31,22 @@ class Header extends Component {
   }
 
   render() {
+    console.log(this.backButton)
     return (
       <div className="header">
+        <Link to="" onClick={this.logOutLink}>
+          <IconButton>
+            <ExitToAppIcon className="header_icon" fontSize="large"/>
+          </IconButton>
+        </Link>
         <Link to="/profile">
           <IconButton>
             <PersonIcon className="header_icon" fontSize="large" />
           </IconButton>
         </Link>
-        <Link to="/">
-          <img className="header_logo" src={"/logo.png"} alt="LinkMe App" />
-        </Link>
-        <Link to="" onClick={this.logOutLink}>
+        <Link to="/matches">
           <IconButton>
-            <ExitToAppIcon className="header_icon" fontSize="large" />
+            <ChatIcon className="header_icon" fontSize="large"/>
           </IconButton>
         </Link>
         <Link to="/likes">
