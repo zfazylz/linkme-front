@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./Header.css";
 import PersonIcon from "@material-ui/icons/Person";
-import ForumIcon from "@material-ui/icons/Forum";
-import ChatIcon from "@material-ui/icons/Chat";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import SearchIcon from '@material-ui/icons/Search';
+import GradeIcon from "@material-ui/icons/Grade";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import { logout } from "../../actions/auth";
@@ -30,9 +30,14 @@ class Header extends Component {
     console.log(this.backButton);
     return (
       <div className="header">
-        <Link to="" onClick={this.logOutLink}>
+        {/*<Link to="" onClick={this.logOutLink}>*/}
+        {/*  <IconButton>*/}
+        {/*    <ExitToAppIcon className="header_icon" fontSize="large" />*/}
+        {/*  </IconButton>*/}
+        {/*</Link>*/}
+        <Link to="/">
           <IconButton>
-            <ExitToAppIcon className="header_icon" fontSize="large" />
+            <SearchIcon className="header_icon" fontSize="large" />
           </IconButton>
         </Link>
         <Link to="/profile">
@@ -42,12 +47,12 @@ class Header extends Component {
         </Link>
         <Link to="/matches">
           <IconButton>
-            <ChatIcon className="header_icon" fontSize="large" />
+            <GradeIcon className="header_icon" fontSize="large" />
           </IconButton>
         </Link>
         <Link to="/likes">
           <IconButton>
-            <ForumIcon className="header_icon" fontSize="large" />
+            <FavoriteIcon className="header_icon" fontSize="large" />
           </IconButton>
         </Link>
       </div>
