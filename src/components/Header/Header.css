@@ -15,10 +15,6 @@ html {
     object-fit: contain;
 }
 
-.header_icon {
-    padding: 20px;
-}
-
 .header > a {
     max-width: 20%;
 }
