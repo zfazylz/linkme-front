@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import "../../components/Chats/Chat.css";
+// import "../../components/Chats/Chat.css";
 import Avatar from "@material-ui/core/Avatar";
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 
 class MatchProfile extends Component {
   state = {};

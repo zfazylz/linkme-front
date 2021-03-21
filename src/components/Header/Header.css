@@ -6,10 +6,14 @@
 }
 
 .header_logo {
-    height: 40px;
+    max-height: 40px;
     object-fit: contain;
 }
 
 .header_icon {
     padding: 20px;
+}
+
+.header > a {
+    max-width: 20%;
 }
